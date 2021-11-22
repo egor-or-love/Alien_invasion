@@ -9,7 +9,7 @@ class Ship():
         self.screen_rect = ai_game.screen.get_rect()
 
         # Загружает изображение корабля и получает прямоугольник.
-        self.image = pygame.image.load('/home/stranger/Документы/python_work/learning_python/alien_invasion/images/ship.bmp')
+        self.image = pygame.image.load('images/ship.bmp')
         self.rect = self.image.get_rect()
 
         # Каждый новый корабль появляется у нижнего края экрана.
