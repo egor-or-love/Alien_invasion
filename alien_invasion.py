@@ -36,9 +36,12 @@ class AlienInvasion:
         """Запуск основного цикла игры."""
         while True:
             self.check_events()
-            self.ship.update()
-            self.update_bullets()
-            self.update_aliens()
+
+            if self.stats.game_active:
+                self.ship.update()
+                self.update_bullets()
+                self.update_aliens()
+
             self.update_screen()
 
     def check_events(self):
@@ -150,19 +153,23 @@ class AlienInvasion:
 
     def ship_hit(self):
         """Обрабатывает столкновение корабля с пришельцем."""
-        # Уменьшение ships_left.
-        self.stats.ships_left -= 1
+        if self.stats.ships_left > 0:
+            # Уменьшение ships_left.
+            self.stats.ships_left -= 1
 
-        # Очистка списков пришельцев и снарядов.
-        self.aliens.empty()
-        self.bullets.empty()
+            # Очистка списков пришельцев и снарядов.
+            self.aliens.empty()
+            self.bullets.empty()
 
-        # Создание нового флота и размещение корабля в центре.
-        self.create_fleet()
-        self.ship.center_ship()
+            # Создание нового флота и размещение корабля в центре.
+            self.create_fleet()
+            self.ship.center_ship()
 
-        # Пауза.
-        sleep(0.5)
+            # Пауза.
+            sleep(0.5)
+
+        else:
+            self.stats.game_active = False
 
     def check_aliens_bottom(self):
         """Проверяет, добрались ли пришельцы до нижнего края экрана."""
