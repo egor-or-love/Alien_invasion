@@ -63,8 +63,25 @@ class AlienInvasion:
 
     def check_play_button(self, mouse_pos):
         """Запускает новую игру при нажатии кнопки Play."""
-        if self.play_button.rect.collidepoint(mouse_pos):
+        button_clicked = self.play_button.rect.collidepoint(mouse_pos)
+        if button_clicked and not self.stats.game_active:
+            # Сброс игровых настроек.
+            self.settings.initialize_dynamic_settings()
+
+            # Сброс игровой статистики
+            self.stats.reset_stats()
             self.stats.game_active = True
+
+            # Очистка списков пришельцев и снарядов.
+            self.aliens.empty()
+            self.bullets.empty()
+
+            # Создание нового флота и размещение корабля в центре.
+            self.create_fleet()
+            self.ship.center_ship()
+
+            # Указатель мыши скрывается.
+            pygame.mouse.set_visible(False)
 
     def check_keydown_events(self, event):
         """Реагирует на нажатие клавиш."""
@@ -72,10 +89,10 @@ class AlienInvasion:
             self.ship.moving_right = True
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
-        elif event.key == pygame.K_q:
-            sys.exit()
         elif event.key == pygame.K_SPACE:
             self.fire_bullet()
+        elif event.key == pygame.K_q:
+            sys.exit()
 
     def check_keyup_events(self, event):
         """Реагирует на отпускание клавиш."""
@@ -110,6 +127,7 @@ class AlienInvasion:
             # Уничтожение существующих снарядов и создание нового флота.
             self.bullets.empty()
             self.create_fleet()
+            self.settings.increase_speed()
 
     def update_aliens(self):
         """Проверяет, достиг ли флот края экрана, с последующим обновлением позиций всех пришельцев во флоте."""
