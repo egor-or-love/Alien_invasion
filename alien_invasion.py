@@ -54,7 +54,7 @@ class AlienInvasion:
         """Обработка нажатия клавиш и события мыши."""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                    sys.exit()
+                sys.exit()
             elif event.type == pygame.KEYDOWN:
                 self.check_keydown_events(event)
             elif event.type == pygame.KEYUP:
@@ -95,7 +95,7 @@ class AlienInvasion:
         elif event.key == pygame.K_SPACE:
             self.fire_bullet()
         elif event.key == pygame.K_q:
-            sys.exit()
+             sys.exit()
 
     def check_keyup_events(self, event):
         """Реагирует на отпускание клавиш."""
@@ -119,6 +119,7 @@ class AlienInvasion:
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
+
         self.check_bullet_alien_collisions()
 
     def check_bullet_alien_collisions(self):
@@ -130,6 +131,7 @@ class AlienInvasion:
             for aliens in collisions.values():
                 self.stats.score += self.settings.alien_points * len(aliens)
             self.sb.prep_score()
+            self.sb.check_high_score()
 
         if not self.aliens:
             # Уничтожение существующих снарядов и создание нового флота.
@@ -208,6 +210,7 @@ class AlienInvasion:
 
         else:
             self.stats.game_active = False
+            pygame.mouse.set_visible(True)
 
     def check_aliens_bottom(self):
         """Проверяет, добрались ли пришельцы до нижнего края экрана."""
