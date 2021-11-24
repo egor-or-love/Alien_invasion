@@ -9,21 +9,21 @@ class Settings():
 
         # Настройки корабля
         self.ship_speed = 5
-        self.ship_limit = 2
+        self.ship_limit = 3
 
         # Параметры снаряда
         self.bullet_speed = 5
-        self.bullet_width = 3000
+        self.bullet_width = 3
         self.bullet_height = 15
         self.bullet_color = (220, 20, 60)
         self.bullets_allowed = 5
 
         # Настройки пришельцев
-        self.alien_speed = 2
+        self.alien_speed = 2.0
         self.fleet_drop_speed = 10
 
         # Темп ускорения игры
-        self.speedup_scale = 2
+        self.speedup_scale = 10
 
         # Темп роста стоимости пришельцев
         self.score_scale = 2
