@@ -1,3 +1,4 @@
+![Снимок экрана от 2022-01-18 02-28-43](https://user-images.githubusercontent.com/33931746/149839076-188a918a-8399-437c-ac45-8a22b935984c.png)
 # alien_invasion
 2D retro game on Python
 
